@@ -35,6 +35,7 @@ export default function Home() {
       <Container>
         <StyledLink href="/shared">Shared</StyledLink>
         <StyledLink href="/folder">Folders</StyledLink>
+        <StyledLink href="/login">Login(test)</StyledLink>
       </Container>
     </>
   );
