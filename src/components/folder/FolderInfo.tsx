@@ -1,6 +1,14 @@
-import React, { FC, createContext, useContext, useState } from "react";
+import React, {
+  FC,
+  ReactPortal,
+  createContext,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import styled from "styled-components";
-import { FolderContext } from "../../pages/Folder";
+import { FolderContext } from "@/pages/folder";
 import FoderOptionMenu from "./FoderOptionMenu";
 import { FolderButton } from "./FolderButton";
 import FolderTitle from "./FolderTitle";
@@ -97,28 +105,38 @@ export const FolderNameContext = createContext<{ folderName: string }>({
   folderName: "",
 });
 
-interface FolderInfoProps {
-  folders: { id: number; name: string }[];
-}
-
-const FolderInfo: FC<FolderInfoProps> = ({ folders }) => {
-  const { folderId: activeFolderId, setFolderId } = useContext(FolderContext);
+const FolderInfo = () => {
+  const {
+    folderId: activeFolderId,
+    setFolderId,
+    folders,
+  } = useContext(FolderContext);
   const [folderName, setFolderName] = useState("전체");
   const [active, setActive] = useState(false);
+  const modalRef = useRef<ReactPortal | null>(null);
+  const backdropRef = useRef<ReactPortal | null>(null);
 
   const openModal = () => setActive(true);
   const closeModal = () => setActive(false);
 
   const ModalInput = ModalWithInput(ModalBase);
 
-  const modal = createPortal(
-    <ModalInput isClose={closeModal} title="폴더 추가" btntext="추가하기" />,
-    document.getElementById("modal")!
-  );
-  const backdrop = createPortal(
-    <Backdrop isClose={closeModal} />,
-    document.getElementById("backdrop")!
-  );
+  useEffect(() => {
+    if (document) {
+      modalRef.current = createPortal(
+        <ModalInput
+          isClose={closeModal}
+          title="폴더 추가"
+          btntext="추가하기"
+        />,
+        document.getElementById("modal")!
+      );
+      backdropRef.current = createPortal(
+        <Backdrop isClose={closeModal} />,
+        document.getElementById("backdrop")!
+      );
+    }
+  }, [active]);
 
   return (
     <FolderNameContext.Provider value={{ folderName }}>
@@ -148,8 +166,8 @@ const FolderInfo: FC<FolderInfoProps> = ({ folders }) => {
           <span>폴더 추가</span>
           <span>+</span>
         </AddFolderButton>
-        {active && modal}
-        {active && backdrop}
+        {active && modalRef.current}
+        {active && backdropRef.current}
       </ButtonsWrapper>
 
       <FolderMenuWrapper>

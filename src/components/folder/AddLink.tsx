@@ -1,9 +1,17 @@
 import styled from "styled-components";
 import linkIcon from "../../assets/svg/link.svg";
-import { ChangeEvent, useState } from "react";
+import {
+  ChangeEvent,
+  ReactPortal,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { createPortal } from "react-dom";
 import Backdrop from "../common/Backdrop";
 import ModalBase from "../Modal/ModalBase";
+import Image from "next/image";
 
 const Container = styled.div`
   background-color: var(--primary-background);
@@ -35,7 +43,7 @@ const AddLinkBarInput = styled.input`
   padding: 0 120px 0 60px;
 `;
 
-const Icon = styled.img`
+const Icon = styled(Image)`
   position: absolute;
   top: 25px;
   left: 25px;
@@ -66,24 +74,30 @@ const AddButton = styled.button`
 function AddLink() {
   const [active, setActive] = useState(false);
   const [link, setLink] = useState("");
+  const modalRef = useRef<ReactPortal | null>(null);
+  const backdropRef = useRef<ReactPortal | null>(null);
 
   const openModal = () => setActive(true);
   const closeModal = () => setActive(false);
 
-  const modal = createPortal(
-    <ModalBase
-      isClose={closeModal}
-      title={"폴더에 추가"}
-      btntext={"추가하기"}
-      addLink={link}
-    />,
-    document.getElementById("modal")!
-  );
+  useEffect(() => {
+    if (document) {
+      backdropRef.current = createPortal(
+        <Backdrop isClose={closeModal} />,
+        document.getElementById("backdrop")!
+      );
 
-  const backdrop = createPortal(
-    <Backdrop isClose={closeModal} />,
-    document.getElementById("backdrop")!
-  );
+      modalRef.current = createPortal(
+        <ModalBase
+          isClose={closeModal}
+          title={"폴더에 추가"}
+          btntext={"추가하기"}
+          addLink={link}
+        />,
+        document.getElementById("modal")!
+      );
+    }
+  }, [active, link]);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setLink(e.target.value);
@@ -99,8 +113,8 @@ function AddLink() {
         />
         <AddButton onClick={openModal}>추가하기</AddButton>
       </AddLinkBar>
-      {active && modal}
-      {active && backdrop}
+      {active && modalRef.current}
+      {active && backdropRef.current}
     </Container>
   );
 }

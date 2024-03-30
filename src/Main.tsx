@@ -24,7 +24,7 @@ function Main() {
     email: "",
     image_source: "",
   });
-  const [userLoadingError, getUserAsync] = useAsync(getUser);
+  const [, getUserAsync] = useAsync(getUser);
 
   // 유저 정보 요청
   const handleLoadUser = async () => {
@@ -46,7 +46,6 @@ function Main() {
           email: userInfo.email,
           image_source: userInfo.image_source,
         }}
-        // userLoadingError={userLoadingError}
         $isHeader={true}
       />
       <div>

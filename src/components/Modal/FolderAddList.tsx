@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useContext } from "react";
 import styled from "styled-components";
 
-import { FolderContext } from "../../pages/Folder";
+import { FolderContext } from "@/pages/folder";
 import checkIcon from "../../assets/svg/check.svg";
 
 const Container = styled.ul`
@@ -40,6 +40,8 @@ const CheckIcon = styled.img`
 
 function FolderAddList() {
   const { folders } = useContext(FolderContext);
+  console.log(FolderContext);
+  console.log(folders);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   const handleListClick = (index: number) => {

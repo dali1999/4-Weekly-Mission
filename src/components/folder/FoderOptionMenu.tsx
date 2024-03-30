@@ -1,15 +1,16 @@
-import React, { useState } from "react";
+import React, { ReactPortal, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import styled from "styled-components";
 
-import shareIcon from "../../assets/svg/share.svg";
-import editIcon from "../../assets/svg/edit.svg";
-import deleteIcon from "../../assets/svg/trash.svg";
+import shareIcon from "@/src/assets/svg/share.svg";
+import editIcon from "@/src/assets/svg/edit.svg";
+import deleteIcon from "@/src/assets/svg/trash.svg";
 
 // Modal
-import Backdrop from "../common/Backdrop";
-import ModalWithInput from "../Modal/ModalWithInput";
-import ModalBase from "../Modal/ModalBase";
+import Backdrop from "@/src/components/common/Backdrop";
+import ModalWithInput from "@/src/components/Modal/ModalWithInput";
+import ModalBase from "@/src/components/Modal/ModalBase";
+import Image from "next/image";
 
 const Container = styled.ul`
   display: flex;
@@ -67,6 +68,9 @@ function FoderOptionMenu() {
   const [btnText, setBtnText] = useState<string>("");
   const [isInputModal, setIsInputModal] = useState<boolean>(false);
 
+  const backdropRef = useRef<ReactPortal | null>(null);
+  const modalRef = useRef<ReactPortal | null>(null);
+
   const openModal = () => setActive(true);
   const closeModal = () => setActive(false);
 
@@ -78,19 +82,23 @@ function FoderOptionMenu() {
 
   const ModalInput = ModalWithInput(ModalBase);
 
-  const modal = createPortal(
-    isInputModal ? (
-      <ModalInput isClose={closeModal} title={title} btntext={btnText} />
-    ) : (
-      <ModalBase isClose={closeModal} title={title} btntext={btnText} />
-    ),
-    document.getElementById("modal")!
-  );
-
-  const backdrop = createPortal(
-    <Backdrop isClose={closeModal} />,
-    document.getElementById("backdrop")!
-  );
+  useEffect(() => {
+    console.log(title);
+    if (document) {
+      backdropRef.current = createPortal(
+        <Backdrop isClose={closeModal} />,
+        document.getElementById("backdrop")!
+      );
+      modalRef.current = createPortal(
+        isInputModal ? (
+          <ModalInput isClose={closeModal} title={title} btntext={btnText} />
+        ) : (
+          <ModalBase isClose={closeModal} title={title} btntext={btnText} />
+        ),
+        document.getElementById("modal")!
+      );
+    }
+  }, [title, active]);
 
   return (
     <Container>
@@ -102,12 +110,12 @@ function FoderOptionMenu() {
             handleModalTitle(list);
           }}
         >
-          <img src={list.icon} alt={list.optionTitle} />
+          <Image src={list.icon} alt={list.optionTitle} />
           <span>{list.optionTitle}</span>
         </button>
       ))}
-      {active && modal}
-      {active && backdrop}
+      {active && backdropRef.current}
+      {active && modalRef.current}
     </Container>
   );
 }

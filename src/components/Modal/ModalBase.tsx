@@ -5,6 +5,7 @@ import { FolderNameContext } from "../folder/FolderInfo";
 import { CardLinkContext } from "../shared/Card";
 import FolderAddList from "./FolderAddList";
 import ShareLists from "./ShareSnsList";
+import Image from "next/image";
 
 const Container = styled.div`
   position: fixed;
@@ -98,7 +99,7 @@ const ModalBase = ({ children, title, isClose, btntext, addLink }: Props) => {
   return (
     <Container>
       <CloseButton onClick={isClose}>
-        <img src={closeBtn} alt="" />
+        <Image src={closeBtn} alt="" />
       </CloseButton>
       <ModalTitle>{title}</ModalTitle>
       {children || <ModalInfo>{info}</ModalInfo>}

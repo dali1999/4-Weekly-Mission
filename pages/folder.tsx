@@ -6,7 +6,7 @@ import React, {
   useState,
 } from "react";
 import styled from "styled-components";
-import { getAllLinks, getFolderLinks, getFolders } from "../api";
+import { getAllLinks, getFolderLinks, getFolders } from "@/src/api";
 import SearchBar from "@/src/components/common/SearchBar";
 import AddLink from "@/src/components/folder/AddLink";
 import FolderInfo from "@/src/components/folder/FolderInfo";
@@ -30,7 +30,7 @@ export const FolderContext = createContext<{
 
 function Folder() {
   const [folderId, setFolderId] = useState<number>(0);
-  const [folders, setFolders] = useState<any[]>([]);
+  const [folders, setFolders] = useState<any[]>([1]);
   const [links, setLinks] = useState<any[]>([]);
   const [allLinks, setAllLinks] = useState<any[]>([]);
   const [inputValue, setInputValue] = useState<string>("");
@@ -69,9 +69,9 @@ function Folder() {
     <FolderContext.Provider value={{ folders, folderId, setFolderId }}>
       <Container>
         <AddLink />
-        <div className="Folder-content-wrapper">
+        <div>
           <SearchBar inputValue={inputValue} setInputValue={setInputValue} />
-          <FolderInfo folders={folders} />
+          <FolderInfo />
           <CardList
             links={folderId === 0 ? allLinks : links}
             inputValue={inputValue}

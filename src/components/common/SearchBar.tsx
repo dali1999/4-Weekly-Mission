@@ -1,8 +1,10 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent } from "react";
 import styled from "styled-components";
-import searchIcon from "../../assets/svg/search.svg";
+import searchIcon from "@/src/assets/svg/search.svg";
+import Image from "next/image";
 
 const Container = styled.div`
+  position: relative;
   margin: 40px 0;
   display: flex;
   padding: 0px 16px;
@@ -32,6 +34,11 @@ const Container = styled.div`
   }
 `;
 
+const SearchIconContainer = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
 interface Props {
   inputValue: string;
   setInputValue: (value: string) => void;
@@ -44,7 +51,10 @@ const SearchBar = ({ inputValue, setInputValue }: Props) => {
 
   return (
     <Container>
-      <img src={searchIcon} alt="" />
+      <SearchIconContainer>
+        <Image src={searchIcon} alt="검색 아이콘" />
+      </SearchIconContainer>
+
       <input
         type="text"
         placeholder="링크를 검색해 보세요"

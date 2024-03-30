@@ -1,9 +1,10 @@
 import styled from "styled-components";
 
-import facebookIcon from "../../assets/svg/facebook.svg";
-import twitterIcon from "../../assets/svg/twitter.svg";
-import youtubeIcon from "../../assets/svg/youtube.svg";
-import instagramIcon from "../../assets/svg/instagram.svg";
+import facebookIcon from "@/src/assets/svg/facebook.svg";
+import twitterIcon from "@/src/assets/svg/twitter.svg";
+import youtubeIcon from "@/src/assets/svg/youtube.svg";
+import instagramIcon from "@/src/assets/svg/instagram.svg";
+import Image from "next/image";
 
 const Container = styled.footer`
   color: var(--white);
@@ -101,7 +102,7 @@ const Footer = () => {
         {SNS_LIST.map((list) => (
           <li key={list.title}>
             <a href={list.url} target="_blank" rel="noreferrer">
-              <img src={list.icon} alt={list.title} />
+              <Image src={list.icon} alt={list.title} />
             </a>
           </li>
         ))}

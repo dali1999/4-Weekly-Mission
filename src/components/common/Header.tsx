@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import logo from "../../assets/svg/logo.svg";
+import logo from "@/src/assets/svg/logo.svg";
+import Image from "next/image";
 
 const Container = styled.header<{ $isHeader: boolean }>`
   display: flex;
@@ -74,12 +75,6 @@ const Profile = styled.div`
   align-items: center;
   height: 53px;
   gap: 10px;
-  img {
-    width: 28px;
-    height: 28px;
-    border-radius: 100px;
-    cursor: pointer;
-  }
   p {
     color: #535353;
     @media (max-width: 767px) {
@@ -90,6 +85,15 @@ const Profile = styled.div`
   @media (max-width: 767px) {
     height: 28px;
   }
+`;
+
+const ProfileImage = styled.div`
+  position: relative;
+  width: 28px;
+  height: 28px;
+  border-radius: 100px;
+  cursor: pointer;
+  overflow: hidden;
 `;
 
 interface UserInfo {
@@ -113,16 +117,20 @@ const Header: React.FunctionComponent<HeaderProps> = ({
     <Container $isHeader={$isHeader}>
       <HeaderWrapper>
         <Logo href="/">
-          <img src={logo} alt="로고" />
+          <Image src={logo} alt="로고" />
         </Logo>
         {isUserInfoEmpty ? (
           <LoginButton className="login-btn" href="/signin">
             로그인
           </LoginButton>
         ) : (
-          <Profile className="profile">
-            <img className="profile-img" src={image_source} alt="" />
-            <p className="profile-email">{email}</p>
+          <Profile>
+            <ProfileImage>
+              {image_source && (
+                <Image src={image_source} fill alt="유저 프로필 이미지" />
+              )}
+            </ProfileImage>
+            <p>{email}</p>
           </Profile>
         )}
       </HeaderWrapper>

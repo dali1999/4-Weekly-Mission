@@ -4,6 +4,7 @@ import styled from "styled-components";
 import kakaoImg from "../../assets/svg/share_kakao.svg";
 import facebookImg from "../../assets/svg/share_facebook.svg";
 import linkImg from "../../assets/svg/share_link.svg";
+import Image from "next/image";
 
 const Container = styled.div`
   display: flex;
@@ -63,7 +64,7 @@ function ShareLists() {
           key={list.name}
           onClick={list.onClick ? list.onClick : () => handleShare(list.url)}
         >
-          <img src={list.img} alt="" />
+          <Image src={list.img} alt="" />
           <span>{list.name}</span>
         </ListContainer>
       ))}
