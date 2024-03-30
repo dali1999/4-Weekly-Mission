@@ -2,13 +2,25 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "ca.slack-edge.com",
-        port: "",
-        pathname: "/**",
-      },
+    domains: [
+      "localhost",
+      "*",
+      "ca.slack-edge.com",
+      "codeit-images.codeit.com",
+      "yt3.googleusercontent.com",
+      "codeit.kr",
+      "testing-library.com",
+      "www.innoforest.co.kr",
+      "opengraph.githubassets.com",
+      "static.codenary.co.kr",
+      "imgorg.catch.co.kr",
+      "wormwlrm.github.io",
+      "rodrigovallades.gallerycdn.vsassets.io",
+      "i.ytimg.com",
+      "img1.daumcdn.net",
+      "signpen.net",
+      "img.ruliweb.com",
+      "www.yupdduk.com",
     ],
   },
 };

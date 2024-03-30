@@ -149,11 +149,11 @@ const FolderInfo = () => {
             setFolderId={setFolderId}
             setFolderName={setFolderName}
           />
-          {folders.map((folder) => {
+          {folders.map((folder, idx) => {
             return (
               <FolderButton
+                key={idx}
                 $active={activeFolderId === folder.id}
-                key={folder.id}
                 folder={folder}
                 activeFolderId={activeFolderId}
                 setFolderId={setFolderId}

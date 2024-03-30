@@ -4,6 +4,7 @@ import styled from "styled-components";
 
 import { FolderContext } from "@/pages/folder";
 import checkIcon from "../../assets/svg/check.svg";
+import Image from "next/image";
 
 const Container = styled.ul`
   display: flex;
@@ -33,15 +34,13 @@ const LinkCount = styled.span`
   color: var(--gray2);
 `;
 
-const CheckIcon = styled.img`
+const CheckIcon = styled(Image)`
   position: absolute;
   right: 10px;
 `;
 
 function FolderAddList() {
   const { folders } = useContext(FolderContext);
-  console.log(FolderContext);
-  console.log(folders);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   const handleListClick = (index: number) => {
@@ -60,7 +59,9 @@ function FolderAddList() {
             {folder.name}
           </FolderName>
           <LinkCount>{folder.link.count}개 링크</LinkCount>
-          {activeIndex === index && <CheckIcon src={checkIcon} />}
+          {activeIndex === index && (
+            <CheckIcon src={checkIcon} alt="체크 아이콘" />
+          )}
         </FolderList>
       ))}
     </Container>

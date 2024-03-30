@@ -1,12 +1,13 @@
 import styled from "styled-components";
-import defaultCardImg from "../../assets/image/default_card_img.jpg";
-import { formatDate, formatTimeAgo } from "../../utils/dateUtils";
+import defaultCardImg from "@/src/assets/image/default_card_img.jpg";
+import { formatDate, formatTimeAgo } from "@/src/utils/dateUtils";
 
-import starIcon from "../../assets/svg/star.svg";
-import selectedStarIcon from "../../assets/svg/selected_star.svg";
-import kebabIcon from "../../assets/svg/kebab.svg";
+import starIcon from "@/src/assets/svg/star.svg";
+import selectedStarIcon from "@/src/assets/svg/selected_star.svg";
+import kebabIcon from "@/src/assets/svg/kebab.svg";
 import { FC, createContext, useState } from "react";
-import Dropdown from "../folder/Dropdown";
+import Dropdown from "@/src/components/folder/Dropdown";
+import Image from "next/image";
 
 const Container = styled.div`
   width: 340px;
@@ -26,8 +27,6 @@ const CardImgWrapper = styled.div`
   border-top-right-radius: 15px;
   overflow: hidden;
   img {
-    width: 340px;
-    height: 200px;
     object-fit: cover;
     transition: transform 0.4s ease;
     &:hover {
@@ -100,9 +99,8 @@ export const CardLinkContext = createContext<CardLinkContextType | undefined>(
 );
 
 const Card: FC<{ link: Link }> = ({ link }) => {
-  const { url, imageSource, image_source, description, createdAt, created_at } =
+  let { url, imageSource, image_source, description, createdAt, created_at } =
     link;
-
   const [active, setActive] = useState(false);
   const [view, setView] = useState(false);
 
@@ -110,15 +108,20 @@ const Card: FC<{ link: Link }> = ({ link }) => {
     setActive(!active);
   };
 
+  if (!image_source?.includes("http")) {
+    image_source = undefined;
+  }
+  console.log(image_source);
+
   return (
     <CardLinkContext.Provider value={{ url }}>
       <Container>
         <StarButton onClick={handleStarClick}>
-          <img src={active ? selectedStarIcon : starIcon} alt="" />
+          <Image src={active ? selectedStarIcon : starIcon} alt="" />
         </StarButton>
 
         <KebabButton>
-          <img
+          <Image
             src={kebabIcon}
             onClick={(e) => {
               e.stopPropagation();
@@ -131,11 +134,16 @@ const Card: FC<{ link: Link }> = ({ link }) => {
 
         <a href={url} target="_blank" rel="noreferrer">
           <CardImgWrapper>
-            <img
-              className="Card-img"
-              src={imageSource || image_source || defaultCardImg}
-              alt="카드 이미지"
-            />
+            {image_source !== undefined ? (
+              <img
+                src={image_source}
+                width={340}
+                height={200}
+                alt="카드 이미지"
+              />
+            ) : (
+              <Image src={defaultCardImg} alt="카드 기본 이미지" />
+            )}
           </CardImgWrapper>
           <CardContentWrapper>
             <p>{formatTimeAgo(created_at)}</p>

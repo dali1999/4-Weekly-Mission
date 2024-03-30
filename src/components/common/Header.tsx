@@ -117,7 +117,7 @@ const Header: React.FunctionComponent<HeaderProps> = ({
     <Container $isHeader={$isHeader}>
       <HeaderWrapper>
         <Logo href="/">
-          <Image src={logo} alt="로고" />
+          <Image src={logo} alt="로고" priority />
         </Logo>
         {isUserInfoEmpty ? (
           <LoginButton className="login-btn" href="/signin">
@@ -127,7 +127,12 @@ const Header: React.FunctionComponent<HeaderProps> = ({
           <Profile>
             <ProfileImage>
               {image_source && (
-                <Image src={image_source} fill alt="유저 프로필 이미지" />
+                <Image
+                  src={image_source}
+                  fill
+                  alt="유저 프로필 이미지"
+                  sizes="28px"
+                />
               )}
             </ProfileImage>
             <p>{email}</p>

@@ -26,7 +26,7 @@ export const FolderButton = ({
   };
 
   return (
-    <li key={folder.id}>
+    <li>
       <FolderButtonsWrapper $active={activeFolderId === folder.id}>
         <button onClick={handleFolderClick}>{folder.name}</button>
       </FolderButtonsWrapper>

@@ -25,14 +25,17 @@ const Container = styled.ul`
     background-color: white;
     border: none;
     cursor: pointer;
-
-    img {
-      width: 17px;
-    }
   }
+
   @media (max-width: 767px) {
     margin-bottom: 20px;
   }
+`;
+
+const ListIconContainer = styled.div`
+  position: relative;
+  width: 17px;
+  height: 17px;
 `;
 
 interface MenuList {
@@ -83,7 +86,6 @@ function FoderOptionMenu() {
   const ModalInput = ModalWithInput(ModalBase);
 
   useEffect(() => {
-    console.log(title);
     if (document) {
       backdropRef.current = createPortal(
         <Backdrop isClose={closeModal} />,
@@ -110,7 +112,9 @@ function FoderOptionMenu() {
             handleModalTitle(list);
           }}
         >
-          <Image src={list.icon} alt={list.optionTitle} />
+          <ListIconContainer>
+            <Image fill src={list.icon} alt={list.optionTitle} />
+          </ListIconContainer>
           <span>{list.optionTitle}</span>
         </button>
       ))}
