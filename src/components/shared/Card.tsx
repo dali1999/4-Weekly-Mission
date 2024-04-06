@@ -111,7 +111,6 @@ const Card: FC<{ link: Link }> = ({ link }) => {
   if (!image_source?.includes("http")) {
     image_source = undefined;
   }
-  console.log(image_source);
 
   return (
     <CardLinkContext.Provider value={{ url }}>
