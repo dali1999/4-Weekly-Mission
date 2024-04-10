@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Input = styled.input`
   font-size: 16px;
-  width: 350px;
+  width: 400px;
   height: 60px;
   padding: 0 15px;
   border-radius: 8px;
@@ -21,6 +21,7 @@ export const TextInput = styled(Input)<{ $hasError: boolean }>`
 `;
 
 export const SubmitButton = styled(Input)`
+  font-size: 18px;
   height: 50px;
   color: white;
   background: var(

@@ -6,11 +6,6 @@ import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import { useEffect, useState } from "react";
-import styled from "styled-components";
-
-const Container = styled.div`
-  min-height: 100%;
-`;
 
 interface UserInfo {
   id: number;
@@ -46,7 +41,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <title>index</title>
       </Head>
 
-      <Container>
+      <div>
         <Header
           userInfo={{
             email: userInfo.email,
@@ -60,7 +55,7 @@ export default function App({ Component, pageProps }: AppProps) {
           <div id="backdrop"></div>
         </div>
         <Footer />
-      </Container>
+      </div>
     </>
   );
 }

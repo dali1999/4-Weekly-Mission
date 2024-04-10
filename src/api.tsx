@@ -47,9 +47,20 @@ export function getFolderLinks(folderId: number): Promise<any> {
   return fetchData(`/users/${USER_ID}/links?folderId=${folderId}`);
 }
 
+//로그인 확인
 export async function postSignIn(data: any) {
   try {
     const result = await fetchData(`/sign-in`, "POST", data);
+    return result;
+  } catch (error) {
+    throw error;
+  }
+}
+
+//회원가입 이메일 중복 확인
+export async function postCheckEmailDuplicate(data: any) {
+  try {
+    const result = await fetchData(`/check-email`, "POST", data);
     return result;
   } catch (error) {
     throw error;

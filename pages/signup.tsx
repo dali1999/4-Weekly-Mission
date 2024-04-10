@@ -1,20 +1,20 @@
 import * as S from "@/pages/signin.style";
-import SigninForm from "@/src/components/sign/SigninForm";
 import SignHeader from "@/src/components/sign/SignHeader";
 import SignSns from "@/src/components/sign/SignSns";
+import SignupForm from "@/src/components/sign/SignupForm";
 
-function Signin() {
+function Signup() {
   return (
     <S.Container>
       <SignHeader
-        memberText="회원이 아니신가요?"
-        linkText="회원 가입하기"
-        link="/signup"
+        memberText="이미 회원이신가요?"
+        linkText="로그인 하기"
+        link="/signin"
       />
-      <SigninForm />
+      <SignupForm />
       <SignSns />
     </S.Container>
   );
 }
 
-export default Signin;
+export default Signup;

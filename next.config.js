@@ -21,6 +21,8 @@ const nextConfig = {
       "signpen.net",
       "img.ruliweb.com",
       "www.yupdduk.com",
+      "www.google.com",
+      "www.kakaocorp.com",
     ],
   },
 };
