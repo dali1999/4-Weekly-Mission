@@ -1,8 +1,8 @@
-import { getUser } from "@/src/api";
-import Footer from "@/src/components/common/Footer";
-import Header from "@/src/components/common/Header";
-import useAsync from "@/src/components/hooks/useAsync";
-import "@/styles/globals.css";
+import { getUser } from "@src/api";
+import Footer from "@src/components/common/Footer";
+import Header from "@src/components/common/Header";
+import useAsync from "@src/components/hooks/useAsync";
+import "@styles/globals.css";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import { useEffect, useState } from "react";
@@ -47,7 +47,7 @@ export default function App({ Component, pageProps }: AppProps) {
             email: userInfo.email,
             image_source: userInfo.image_source,
           }}
-          $isHeader={true}
+          $isHeader
         />
         <div>
           <Component {...pageProps} />

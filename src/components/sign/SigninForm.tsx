@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import * as S from "@/src/components/sign/SigninForm.style";
+import * as S from "@src/components/sign/SigninForm.style";
 import { useForm } from "react-hook-form";
 import Image from "next/image";
-import eyeOnIcon from "@/assets/svg/eye-on.svg";
-import eyeOffIcon from "@/assets/svg/eye-off.svg";
-import { postSignIn } from "@/src/api";
+import eyeOnIcon from "@assets/svg/eye-on.svg";
+import eyeOffIcon from "@assets/svg/eye-off.svg";
+import { postSignIn } from "@src/api";
 import { useRouter } from "next/router";
-import Input from "@/src/components/sign/Input";
-import ERROR from "@/src/components/sign/ErrorMessages";
+import Input from "@src/components/sign/Input";
+import ERROR from "@src/components/sign/ErrorMessages";
 
 type FormType = {
   email: string;

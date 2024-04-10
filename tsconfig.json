@@ -15,10 +15,10 @@
     "incremental": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./*"],
-      "@/components/*": ["src/components/*"],
-      "@/pages/*": ["pages/*"],
-      "@/assets/*": ["src/assets/*"]
+      "@*": ["./*"],
+      "@components/*": ["src/components/*"],
+      "@pages/*": ["pages/*"],
+      "@assets/*": ["src/assets/*"]
     }
   },
   "include": ["src", "src/custom.d.ts", "next-env.d.ts", "**/*.ts", "**/*.tsx"],

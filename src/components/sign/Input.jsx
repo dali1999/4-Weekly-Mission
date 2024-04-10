@@ -1,4 +1,4 @@
-import * as S from "@/components/sign/Input.style";
+import * as S from "@components/sign/Input.style";
 
 function Input() {
   return <S.Input />;

@@ -1,7 +1,7 @@
 import React from "react";
-import * as S from "@/components/sign/SignSns.style";
-import googleIcon from "@/assets/image/sign-google.png";
-import kakaoIcon from "@/assets/image/sign-kakao.png";
+import * as S from "@components/sign/SignSns.style";
+import googleIcon from "@assets/image/sign-google.png";
+import kakaoIcon from "@assets/image/sign-kakao.png";
 import Image from "next/image";
 import Link from "next/link";
 

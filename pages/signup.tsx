@@ -1,7 +1,7 @@
-import * as S from "@/pages/signin.style";
-import SignHeader from "@/src/components/sign/SignHeader";
-import SignSns from "@/src/components/sign/SignSns";
-import SignupForm from "@/src/components/sign/SignupForm";
+import * as S from "@pages/signin.style";
+import SignHeader from "@src/components/sign/SignHeader";
+import SignSns from "@src/components/sign/SignSns";
+import SignupForm from "@src/components/sign/SignupForm";
 
 function Signup() {
   return (

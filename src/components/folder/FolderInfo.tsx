@@ -1,5 +1,4 @@
 import React, {
-  FC,
   ReactPortal,
   createContext,
   useContext,
@@ -9,13 +8,13 @@ import React, {
 } from "react";
 import styled from "styled-components";
 import { FolderContext } from "@/pages/folder";
-import FoderOptionMenu from "./FoderOptionMenu";
-import { FolderButton } from "./FolderButton";
-import FolderTitle from "./FolderTitle";
-import ModalWithInput from "../Modal/ModalWithInput";
-import ModalBase from "../Modal/ModalBase";
+import FoderOptionMenu from "@components/folder/FoderOptionMenu";
+import { FolderButton } from "@components/folder/FolderButton";
+import FolderTitle from "@components/folder/FolderTitle";
+import ModalWithInput from "@components/Modal/ModalWithInput";
+import ModalBase from "@components/Modal/ModalBase";
 import { createPortal } from "react-dom";
-import Backdrop from "../common/Backdrop";
+import Backdrop from "@components/common/Backdrop";
 
 const ButtonsWrapper = styled.div`
   display: flex;

@@ -2,14 +2,14 @@ import React, { ReactPortal, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import styled from "styled-components";
 
-import shareIcon from "@/src/assets/svg/share.svg";
-import editIcon from "@/src/assets/svg/edit.svg";
-import deleteIcon from "@/src/assets/svg/trash.svg";
+import shareIcon from "@src/assets/svg/share.svg";
+import editIcon from "@src/assets/svg/edit.svg";
+import deleteIcon from "@src/assets/svg/trash.svg";
 
 // Modal
-import Backdrop from "@/src/components/common/Backdrop";
-import ModalWithInput from "@/src/components/Modal/ModalWithInput";
-import ModalBase from "@/src/components/Modal/ModalBase";
+import Backdrop from "@src/components/common/Backdrop";
+import ModalWithInput from "@src/components/Modal/ModalWithInput";
+import ModalBase from "@src/components/Modal/ModalBase";
 import Image from "next/image";
 
 const Container = styled.ul`
@@ -27,7 +27,7 @@ const Container = styled.ul`
     cursor: pointer;
   }
 
-  @media (max-width: 767px) {
+  @edia (max-width: 767px) {
     margin-bottom: 20px;
   }
 `;

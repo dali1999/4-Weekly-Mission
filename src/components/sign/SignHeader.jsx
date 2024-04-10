@@ -1,7 +1,7 @@
 import React from "react";
-import * as S from "@/components/sign/SignHeader.style";
+import * as S from "@components/sign/SignHeader.style";
+import logo from "@assets/svg/logo.svg";
 import Image from "next/image";
-import logo from "@/assets/svg/logo.svg";
 
 function SignHeader({ memberText, linkText, link }) {
   return (

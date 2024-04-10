@@ -6,12 +6,12 @@ import React, {
   useState,
 } from "react";
 import styled from "styled-components";
-import { getAllLinks, getFolderLinks, getFolders } from "@/src/api";
-import SearchBar from "@/src/components/common/SearchBar";
-import AddLink from "@/src/components/folder/AddLink";
-import FolderInfo from "@/src/components/folder/FolderInfo";
-import useAsync from "@/src/components/hooks/useAsync";
-import CardList from "@/src/components/shared/CardList";
+import { getAllLinks, getFolderLinks, getFolders } from "@src/api";
+import SearchBar from "@src/components/common/SearchBar";
+import AddLink from "@src/components/folder/AddLink";
+import FolderInfo from "@src/components/folder/FolderInfo";
+import useAsync from "@src/components/hooks/useAsync";
+import CardList from "@src/components/shared/CardList";
 
 const Container = styled.main`
   display: flex;
@@ -41,21 +41,14 @@ function Folder() {
 
   const fetchData = async (folderId: number) => {
     try {
-      const promises: Promise<any>[] = [];
-
-      if (typeof getFoldersAsync === "function")
-        promises.push(getFoldersAsync());
-      if (typeof getAllLinksAsync === "function")
-        promises.push(getAllLinksAsync());
-      if (typeof getFolderLinksAsync === "function")
-        promises.push(getFolderLinksAsync(folderId));
-
+      const folderPromise = getFoldersAsync();
+      const linksPromise = getAllLinksAsync();
+      const folderLinksPromise = getFolderLinksAsync(folderId);
       const [foldersResponse, allLinksResponse, folderLinksResponse] =
-        await Promise.all(promises);
-
-      if (foldersResponse) setFolders(foldersResponse.data);
-      if (allLinksResponse) setAllLinks(allLinksResponse.data);
-      if (folderLinksResponse) setLinks(folderLinksResponse.data);
+        await Promise.all([folderPromise, linksPromise, folderLinksPromise]);
+      setFolders(foldersResponse?.data);
+      setAllLinks(allLinksResponse?.data);
+      setLinks(folderLinksResponse?.data);
     } catch (error) {
       console.error("Error:", error);
     }

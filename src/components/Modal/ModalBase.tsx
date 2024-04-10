@@ -1,10 +1,10 @@
 import { useContext } from "react";
 import styled from "styled-components";
-import closeBtn from "../../assets/svg/close.svg";
-import { FolderNameContext } from "../folder/FolderInfo";
-import { CardLinkContext } from "../shared/Card";
-import FolderAddList from "./FolderAddList";
-import ShareLists from "./ShareSnsList";
+import closeBtn from "@assets/svg/close.svg";
+import { FolderNameContext } from "@components/folder/FolderInfo";
+import { CardLinkContext } from "@components/shared/Card";
+import FolderAddList from "@components/Modal/FolderAddList";
+import ShareLists from "@components/Modal/ShareSnsList";
 import Image from "next/image";
 
 const Container = styled.div`
