@@ -8,6 +8,7 @@ import { postCheckEmailDuplicate, postSignUp } from "@/src/api";
 import { useRouter } from "next/router";
 import Input from "@/src/components/sign/Input";
 import ERROR from "@/src/components/sign/ErrorMessages";
+import { access } from "fs";
 
 type FormType = {
   email: string;
@@ -47,10 +48,17 @@ function SignupForm() {
     }
   };
 
-  const handleCheckSignIn = async (data: FormType): Promise<boolean> => {
+  const handleCheckSignUp = async (data: FormType): Promise<boolean> => {
     try {
       const userSignInData = { email: data.email, password: data.password };
-      await postSignUp(userSignInData);
+      const result = await postSignUp(userSignInData);
+      const accessToken = result.data?.accessToken;
+      console.log(accessToken);
+      if (accessToken) {
+        localStorage.setItem("accessToken", accessToken);
+      } else {
+        throw new Error("Access token이 없습니다.");
+      }
       return true;
     } catch (error) {
       return false;
@@ -60,7 +68,7 @@ function SignupForm() {
   const onSubmit = async (data: FormType) => {
     const isPasswordMatch = handleCheckPasswordMatch(data);
     const isEmailDuplicate = await handleCheckEmailDuplicate(data);
-    const isValidSignIn = await handleCheckSignIn(data);
+    const isValidSignIn = await handleCheckSignUp(data);
 
     if (isPasswordMatch && isEmailDuplicate && isValidSignIn) {
       router.push("/folder");

@@ -27,7 +27,15 @@ function SigninForm() {
 
   const onSubmit = async (data: FormType) => {
     try {
-      await postSignIn(data);
+      const result = await postSignIn(data);
+      const accessToken = result.data?.accessToken;
+      console.log(accessToken);
+
+      if (accessToken) {
+        localStorage.setItem("accessToken", accessToken);
+      } else {
+        throw new Error("Access token이 없습니다.");
+      }
       router.push("/folder");
     } catch (error) {
       setError("email", { type: "isValidData" });
