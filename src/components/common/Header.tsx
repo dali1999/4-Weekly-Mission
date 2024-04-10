@@ -110,7 +110,7 @@ const Header: React.FunctionComponent<HeaderProps> = ({
   userInfo,
   $isHeader,
 }) => {
-  const { image_source, email } = userInfo;
+  // const { image_source, email } = userInfo;
   const isUserInfoEmpty = Object.keys(userInfo).length === 0;
 
   return (
@@ -126,16 +126,16 @@ const Header: React.FunctionComponent<HeaderProps> = ({
         ) : (
           <Profile>
             <ProfileImage>
-              {image_source && (
+              {userInfo.image_source && (
                 <Image
-                  src={image_source}
+                  src={userInfo.image_source}
                   fill
                   alt="유저 프로필 이미지"
                   sizes="28px"
                 />
               )}
             </ProfileImage>
-            <p>{email}</p>
+            <p>{userInfo.email}</p>
           </Profile>
         )}
       </HeaderWrapper>
