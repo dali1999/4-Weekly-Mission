@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import Image from "next/image";
 import eyeOnIcon from "@/assets/svg/eye-on.svg";
 import eyeOffIcon from "@/assets/svg/eye-off.svg";
-import { postCheckEmailDuplicate, postSignIn } from "@/src/api";
+import { postCheckEmailDuplicate, postSignUp } from "@/src/api";
 import { useRouter } from "next/router";
 import Input from "@/src/components/sign/Input";
 import ERROR from "@/src/components/sign/ErrorMessages";
@@ -47,11 +47,22 @@ function SignupForm() {
     }
   };
 
+  const handleCheckSignIn = async (data: FormType): Promise<boolean> => {
+    try {
+      const userSignInData = { email: data.email, password: data.password };
+      await postSignUp(userSignInData);
+      return true;
+    } catch (error) {
+      return false;
+    }
+  };
+
   const onSubmit = async (data: FormType) => {
     const isPasswordMatch = handleCheckPasswordMatch(data);
     const isEmailDuplicate = await handleCheckEmailDuplicate(data);
+    const isValidSignIn = await handleCheckSignIn(data);
 
-    if (isPasswordMatch && isEmailDuplicate) {
+    if (isPasswordMatch && isEmailDuplicate && isValidSignIn) {
       router.push("/folder");
     }
   };

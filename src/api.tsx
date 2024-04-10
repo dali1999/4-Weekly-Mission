@@ -66,3 +66,13 @@ export async function postCheckEmailDuplicate(data: any) {
     throw error;
   }
 }
+
+//회원가입 확인
+export async function postSignUp(data: any) {
+  try {
+    const result = await fetchData(`/sign-up`, "POST", data);
+    return result;
+  } catch (error) {
+    throw error;
+  }
+}
