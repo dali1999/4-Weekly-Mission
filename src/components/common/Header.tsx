@@ -2,11 +2,11 @@ import styled from "styled-components";
 import logo from "@/src/assets/svg/logo.svg";
 import Image from "next/image";
 
-const Container = styled.header<{ $isHeader: boolean }>`
+const Container = styled.header`
   display: flex;
   padding: 20px 200px;
   flex-direction: column;
-  position: ${({ $isHeader }) => ($isHeader ? "relative" : "sticky")};
+  position: relative;
   background-color: var(--primary-background);
   top: 0;
   height: 93px;
@@ -103,18 +103,14 @@ interface UserInfo {
 
 interface HeaderProps {
   userInfo: UserInfo;
-  $isHeader: boolean;
 }
 
-const Header: React.FunctionComponent<HeaderProps> = ({
-  userInfo,
-  $isHeader,
-}) => {
-  // const { image_source, email } = userInfo;
+const Header: React.FunctionComponent<HeaderProps> = ({ userInfo }) => {
+  const { image_source, email } = userInfo;
   const isUserInfoEmpty = Object.keys(userInfo).length === 0;
 
   return (
-    <Container $isHeader={$isHeader}>
+    <Container>
       <HeaderWrapper>
         <Logo href="/">
           <Image src={logo} alt="로고" priority />

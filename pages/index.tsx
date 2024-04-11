@@ -42,7 +42,7 @@ function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Container>
-        <StyledLink href="/shared">Shared</StyledLink>
+        {/* <StyledLink href="/shared">Shared</StyledLink> */}
         <StyledLink href="/folder">Folders</StyledLink>
         <StyledLink href={token ? "/folder" : "/signin"}>Login</StyledLink>
       </Container>
