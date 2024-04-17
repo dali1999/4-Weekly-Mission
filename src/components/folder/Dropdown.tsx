@@ -1,8 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import { createPortal } from "react-dom";
 import styled from "styled-components";
-import Backdrop from "../common/Backdrop";
-import ModalBase from "../Modal/ModalBase";
+import Backdrop from "@components/common/Backdrop";
+import ModalBase from "@components/Modal/ModalBase";
 
 const Container = styled.ul`
   box-shadow: 0px 2px 8px 0px rgba(51, 50, 54, 0.2);

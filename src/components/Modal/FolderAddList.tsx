@@ -3,7 +3,7 @@ import { useContext } from "react";
 import styled from "styled-components";
 
 import { FolderContext } from "@/pages/folder";
-import checkIcon from "../../assets/svg/check.svg";
+import checkIcon from "@assets/svg/check.svg";
 import Image from "next/image";
 
 const Container = styled.ul`

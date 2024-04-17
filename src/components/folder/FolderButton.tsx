@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction } from "react";
-import { FolderButtonsWrapper } from "./FolderInfo";
+import { FolderButtonsWrapper } from "@components/folder/FolderInfo";
 
 interface Folder {
   id: number;

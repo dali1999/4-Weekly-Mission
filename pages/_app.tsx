@@ -1,16 +1,11 @@
-import { getUser } from "@/src/api";
-import Footer from "@/src/components/common/Footer";
-import Header from "@/src/components/common/Header";
-import useAsync from "@/src/components/hooks/useAsync";
-import "@/styles/globals.css";
+import { getUser } from "@src/api";
+import Footer from "@src/components/common/Footer";
+import Header from "@src/components/common/Header";
+import useAsync from "@src/components/hooks/useAsync";
+import "@styles/globals.css";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import { useEffect, useState } from "react";
-import styled from "styled-components";
-
-const Container = styled.div`
-  min-height: 100%;
-`;
 
 interface UserInfo {
   id: number;
@@ -46,13 +41,13 @@ export default function App({ Component, pageProps }: AppProps) {
         <title>index</title>
       </Head>
 
-      <Container>
+      <div>
         <Header
           userInfo={{
             email: userInfo.email,
             image_source: userInfo.image_source,
           }}
-          $isHeader={true}
+          $isHeader
         />
         <div>
           <Component {...pageProps} />
@@ -60,7 +55,7 @@ export default function App({ Component, pageProps }: AppProps) {
           <div id="backdrop"></div>
         </div>
         <Footer />
-      </Container>
+      </div>
     </>
   );
 }

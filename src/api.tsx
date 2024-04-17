@@ -1,9 +1,21 @@
 const BASE_URL = "https://bootcamp-api.codeit.kr/api";
 const USER_ID = 4;
 
-async function fetchData(endpoint: string): Promise<any> {
+async function fetchData(
+  endpoint: string,
+  method: string = "GET",
+  body?: any
+): Promise<any> {
   const url = `${BASE_URL}${endpoint}`;
-  const response = await fetch(url);
+  const options: RequestInit = {
+    method,
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: body ? JSON.stringify(body) : undefined,
+  };
+
+  const response = await fetch(url, options);
   if (!response.ok) {
     throw new Error(`${endpoint} 요청 중 오류가 발생했습니다.`);
   }
@@ -33,4 +45,34 @@ export function getAllLinks(): Promise<any> {
 //특정 폴더 링크
 export function getFolderLinks(folderId: number): Promise<any> {
   return fetchData(`/users/${USER_ID}/links?folderId=${folderId}`);
+}
+
+//로그인 확인
+export async function postSignIn(data: any) {
+  try {
+    const result = await fetchData(`/sign-in`, "POST", data);
+    return result;
+  } catch (error) {
+    throw error;
+  }
+}
+
+//회원가입 이메일 중복 확인
+export async function postCheckEmailDuplicate(data: any) {
+  try {
+    const result = await fetchData(`/check-email`, "POST", data);
+    return result;
+  } catch (error) {
+    throw error;
+  }
+}
+
+//회원가입 확인
+export async function postSignUp(data: any) {
+  try {
+    const result = await fetchData(`/sign-up`, "POST", data);
+    return result;
+  } catch (error) {
+    throw error;
+  }
 }

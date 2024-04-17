@@ -1,16 +1,9 @@
 import styled from "styled-components";
-import linkIcon from "../../assets/svg/link.svg";
-import {
-  ChangeEvent,
-  ReactPortal,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import linkIcon from "@assets/svg/link.svg";
+import { ChangeEvent, ReactPortal, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import Backdrop from "../common/Backdrop";
-import ModalBase from "../Modal/ModalBase";
+import Backdrop from "@components/common/Backdrop";
+import ModalBase from "@components/Modal/ModalBase";
 import Image from "next/image";
 
 const Container = styled.div`

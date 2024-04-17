@@ -1,6 +1,7 @@
 import Head from "next/head";
 import styled from "styled-components";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 const Container = styled.div`
   height: 600px;
@@ -25,7 +26,15 @@ const StyledLink = styled(Link)`
   }
 `;
 
-export default function Home() {
+function Home() {
+  const [token, setToken] = useState<string>();
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const accessToken = localStorage.getItem("accessToken");
+      if (accessToken !== null) setToken(accessToken);
+    }
+  }, []);
   return (
     <>
       <Head>
@@ -35,8 +44,10 @@ export default function Home() {
       <Container>
         <StyledLink href="/shared">Shared</StyledLink>
         <StyledLink href="/folder">Folders</StyledLink>
-        <StyledLink href="/login">Login(test)</StyledLink>
+        <StyledLink href={token ? "/folder" : "/signin"}>Login</StyledLink>
       </Container>
     </>
   );
 }
+
+export default Home;
