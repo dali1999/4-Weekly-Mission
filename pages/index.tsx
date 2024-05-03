@@ -2,6 +2,7 @@ import Head from "next/head";
 import styled from "styled-components";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { safeGetItem } from "@src/utils/safeKey";
 
 const Container = styled.div`
   height: 600px;
@@ -31,10 +32,11 @@ function Home() {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const accessToken = localStorage.getItem("accessToken");
+      const accessToken = safeGetItem("accessToken");
       if (accessToken !== null) setToken(accessToken);
     }
   }, []);
+
   return (
     <>
       <Head>

@@ -8,6 +8,10 @@ import { postCheckEmailDuplicate, postSignUp } from "@src/api";
 import { useRouter } from "next/router";
 import Input from "@src/components/sign/Input";
 import ERROR from "@src/components/sign/ErrorMessages";
+import {
+  emailTextInputProps,
+  passwordTextInputProps,
+} from "@src/utils/formProps";
 
 type FormType = {
   email: string;
@@ -87,12 +91,8 @@ function SignupForm() {
       <S.Label>이메일</S.Label>
       <div style={{ position: "relative" }}>
         <Input.TextInput
-          type="text"
-          register={register("email", {
-            required: true,
-            pattern: /^[a-z0-9]+@[a-z]+\.[a-z]{2,3}$/,
-          })}
-          placeholder="이메일을 입력해 주세요"
+          {...emailTextInputProps}
+          register={register("email", emailTextInputProps.registerOptions)}
           $hasError={!!errors.email}
         />
         <S.ErrorMessage>
@@ -106,12 +106,11 @@ function SignupForm() {
       <S.Label>비밀번호</S.Label>
       <div style={{ position: "relative" }}>
         <Input.TextInput
-          type={inputType}
-          register={register("password", {
-            required: true,
-            pattern: /^(?=.*[a-zA-Z])(?=.*\d).{8,}$/,
-          })}
-          placeholder="영문, 숫자를 조합해 8자 이상 입력해 주세요"
+          {...passwordTextInputProps(inputType)}
+          register={
+            (register("password"),
+            passwordTextInputProps(inputType).registerOptions)
+          }
           $hasError={!!errors.password}
         />
         <S.EyeIconWrapper onClick={handleEyeIconClick}>

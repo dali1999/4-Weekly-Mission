@@ -8,6 +8,8 @@ import { postSignIn } from "@src/api";
 import { useRouter } from "next/router";
 import Input from "@src/components/sign/Input";
 import ERROR from "@src/components/sign/ErrorMessages";
+import { saveToLocalStorage } from "@src/utils/safeKey";
+import { emailTextInputProps } from "@src/utils/formProps";
 
 type FormType = {
   email: string;
@@ -32,7 +34,7 @@ function SigninForm() {
       console.log(accessToken);
 
       if (accessToken) {
-        localStorage.setItem("accessToken", accessToken);
+        saveToLocalStorage("accessToken", accessToken);
       } else {
         throw new Error("Access token이 없습니다.");
       }
@@ -56,12 +58,8 @@ function SigninForm() {
       <S.Label>이메일</S.Label>
       <div style={{ position: "relative" }}>
         <Input.TextInput
-          type="text"
-          register={register("email", {
-            required: true,
-            pattern: /^[a-z0-9]+@[a-z]+\.[a-z]{2,3}$/,
-          })}
-          placeholder="이메일을 입력해 주세요"
+          {...emailTextInputProps}
+          register={register("email", emailTextInputProps.registerOptions)}
           $hasError={!!errors.email}
         />
         <S.ErrorMessage>
